@@ -6,7 +6,8 @@ exports = module.exports = {
   bet: function (gamestate, bet) {
 
     'use strict';
-
+    
+    debugger;
     let me = gamestate.me;
     let cards = gamestate.players[me].cards;
     let cardsLength = cards.length;
@@ -47,7 +48,7 @@ exports = module.exports = {
 
   isColor: function(cards) {
 
-    return (cards[0].type === cards[1].type;
+    return (cards[0].type === cards[1].type);
 
   },
 
