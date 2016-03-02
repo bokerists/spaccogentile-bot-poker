@@ -17,7 +17,7 @@ exports = module.exports = {
 
   },
 
-  cardToNumber: function(cardRank) {
+  cardValue: function(cardRank) {
 
         if (parseInt(cardRank).toString() !="NaN") {
             return cardRank;
@@ -39,7 +39,12 @@ exports = module.exports = {
   algoritmoDelDiavoloPokerista: function(cards) {
 
     if(this.isCoupleValue(cards)) {
-      return 10000;
+      var value = parseInt(this.cardValue(cards[0].rank), 10) + parseInt(this.cardValue(cards[1].rank), 10);
+      if(value > 16) {
+        return 10000;
+      } else {
+        return 5000;
+      }
     }
 
     return 0;
