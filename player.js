@@ -8,64 +8,38 @@ exports = module.exports = {
     'use strict';
     
     debugger;
-    let me = gamestate.me;
-    let cards = gamestate.players[me].cards;
-    let cardsLength = cards.length;
-    let betAmount = algoritmoDelDiavoloPokerista(cards);
+    var me = gamestate.me;
+    var cards = gamestate.players[me].cards;
+    var cardsLength = cards.length;
+    var betAmount = this.algoritmoDelDiavoloPokerista(cards);
 
     return bet(betAmount);
 
   },
 
-  cardToNumber: function(cardRank) {
-      
-      if( parseInt(cardRank).toString() != "NaN" ) {
-        return cardRank;
-      }
+  cardToNumber: function(cardRank) {
 
-      if( cardRank === 'J' ) return '11';
-      if( cardRank === 'Q' ) return '12';
-      if( cardRank === 'K' ) return '13';
-      if( cardRank === 'A' ) return '14';
+        if (parseInt(cardRank).toString() !="NaN") {
+            return cardRank;
+        }
 
-  },
-
-  cardsValue: function(cards) {
-
-    for( let i=0;i<=cardsLength;i++ ) {
-      myHandValue += cardToNumber( gamestate.players[me].cards[i] );
-    }
-
-    return myHandValue;
+        if (cardRank === 'J') return '11';
+        if (cardRank === 'Q') return '12';
+        if (cardRank === 'K') return '13';
+        if (cardRank === 'A') return '14';
 
   },
 
-  isCoupleValue: function(cards) {
+  isCoupleValue: function(cards) {
 
     return (cards[0].rank === cards[1].rank);
   
   },
 
-  isColor: function(cards) {
-
-    return (cards[0].type === cards[1].type);
-
-  },
-
   algoritmoDelDiavoloPokerista: function(cards) {
 
-    if(isCoupleValue(cards) && cardsValue(cards) > 18) {
-
-      return 5000;
-
-    } else if(isCoupleValue(cards) && cardsValue(cards) > 12) {
-
-      return 1000;
-
-    } else if(isCoupleValue && cardsValue > 10) {
-      
-      return 500;
-
+    if(this.isCoupleValue(cards)) {
+      return 10000;
     }
 
     return 0;
