@@ -8,22 +8,9 @@ exports = module.exports = {
     'use strict';
 
     let me = gamestate.me;
-    let cardsLength = gamestate.players[me].cards.length;
-    let myHandValue = 0;
-    let betAmount = 0;
-
-    for( let i=0;i<=cardsLength;i++ ) {
-      myHandValue += cardToNumber( gamestate.players[me].cards[i] );
-    }
-
-    // se ho coppia di 9 in su, ci vado
-    if(myHandValue > 18) {
-      betAmount = 1000;
-    } /*else if(myHandValue > 18) {
-      betAmount = 1000;
-    }*/ else {
-      betAmount = 0;
-    }
+    let cards = gamestate.players[me].cards;
+    let cardsLength = cards.length;
+    let betAmount = algoritmoDelDiavoloPokerista(cards);
 
     return bet(betAmount);
 
@@ -40,7 +27,47 @@ exports = module.exports = {
       if( cardRank === 'K' ) return '13';
       if( cardRank === 'A' ) return '14';
 
+  },
 
+  cardsValue: function(cards) {
+
+    for( let i=0;i<=cardsLength;i++ ) {
+      myHandValue += cardToNumber( gamestate.players[me].cards[i] );
+    }
+
+    return myHandValue;
+
+  },
+
+  isCoupleValue: function(cards) {
+
+    return (cards[0].rank === cards[1].rank);
+  
+  },
+
+  isColor: function(cards) {
+
+    return (cards[0].type === cards[1].type;
+
+  },
+
+  algoritmoDelDiavoloPokerista: function(cards) {
+
+    if(isCoupleValue(cards) && cardsValue(cards) > 18) {
+
+      return 5000;
+
+    } else if(isCoupleValue(cards) && cardsValue(cards) > 12) {
+
+      return 1000;
+
+    } else if(isCoupleValue && cardsValue > 10) {
+      
+      return 500;
+
+    }
+
+    return 0;
 
   }
 
