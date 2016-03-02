@@ -8,12 +8,20 @@ exports = module.exports = {
     'use strict';
 
     let me = gamestate.me;
-    let myHandValue = cardToNumber( gamestate.players[me].cards );
+    let cardsLength = gamestate.players[me].cards.length;
+    let myHandValue = 0;
     let betAmount = 0;
 
+    for( let i=0;i<=cardsLength;i++ ) {
+      myHandValue += cardToNumber( gamestate.players[me].cards[i] );
+    }
+
+    // se ho coppia di 9 in su, ci vado
     if(myHandValue > 18) {
       betAmount = 1000;
-    } else {
+    } /*else if(myHandValue > 18) {
+      betAmount = 1000;
+    }*/ else {
       betAmount = 0;
     }
 
@@ -31,6 +39,8 @@ exports = module.exports = {
       if( cardRank === 'Q' ) return '12';
       if( cardRank === 'K' ) return '13';
       if( cardRank === 'A' ) return '14';
+
+
 
   }
 
